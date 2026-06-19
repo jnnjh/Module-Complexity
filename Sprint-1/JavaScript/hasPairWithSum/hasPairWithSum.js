@@ -19,3 +19,5 @@ export function hasPairWithSum(numbers, target) {
   }
   return false;
 }
+
+// In order to find the pair, it needs to do 2 loops. Nothing much can be done here to improve efficiency.

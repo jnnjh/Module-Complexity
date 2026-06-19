@@ -12,3 +12,5 @@
 export const findCommonItems = (firstArray, secondArray) => [
   ...new Set(firstArray.filter((item) => secondArray.includes(item))),
 ];
+
+// We can't improve this as we need a nested loops are necessary for comparison

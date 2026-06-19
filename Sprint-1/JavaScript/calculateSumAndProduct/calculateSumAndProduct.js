@@ -18,12 +18,9 @@
  */
 export function calculateSumAndProduct(numbers) {
   let sum = 0;
-  for (const num of numbers) {
-    sum += num;
-  }
-
   let product = 1;
   for (const num of numbers) {
+    sum += num;
     product *= num;
   }
 
@@ -32,3 +29,6 @@ export function calculateSumAndProduct(numbers) {
     product: product,
   };
 }
+
+// This function had 2 loops so the time complexity was O(n2).
+// The updated code has time complexity of O(n) since there is only 1 loop.

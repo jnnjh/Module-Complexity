@@ -9,28 +9,8 @@
  * @returns {Array} New sequence with duplicates removed
  */
 export function removeDuplicates(inputSequence) {
-  const uniqueItems = [];
-
-  for (
-    let currentIndex = 0;
-    currentIndex < inputSequence.length;
-    currentIndex++
-  ) {
-    let isDuplicate = false;
-    for (
-      let compareIndex = 0;
-      compareIndex < uniqueItems.length;
-      compareIndex++
-    ) {
-      if (inputSequence[currentIndex] === uniqueItems[compareIndex]) {
-        isDuplicate = true;
-        break;
-      }
-    }
-    if (!isDuplicate) {
-      uniqueItems.push(inputSequence[currentIndex]);
-    }
-  }
-
-  return uniqueItems;
+  return [...new Set(inputSequence)];
 }
+
+// The previous code had a time complexity of O(n2) because it had 2 loops to check for duplicates.
+// Set has time complexity of O(n) as it just deletes duplicates when needed and the time complexity depends on the input size.
