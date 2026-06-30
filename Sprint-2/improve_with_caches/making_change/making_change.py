@@ -13,20 +13,12 @@ def ways_to_make_change(total: int) -> int:
 def ways_to_make_change_helper(total: int, coins: List[int]) -> int:
     """
     Helper function for ways_to_make_change to avoid exposing the coins parameter to callers.
-    """
-    if total == 0 or len(coins) == 0:
-        return 0
-
-    ways = 0
-    for coin_index in range(len(coins)):
-        coin = coins[coin_index]
-        count_of_coin = 1
-        while coin * count_of_coin <= total:
-            total_from_coins = coin * count_of_coin
-            if total_from_coins == total:
-                ways += 1
-            else:
-                intermediate = ways_to_make_change_helper(total - total_from_coins, coins=coins[coin_index+1:])
-                ways += intermediate
-            count_of_coin += 1
-    return ways
+    """  
+    ways = [0] * (total + 1)
+    ways[0] = 1
+    
+    for coin in coins:
+        for amount in range(coin, total + 1):
+            ways[amount] += ways[amount - coin]
+    
+    return ways[total]
