@@ -32,7 +32,7 @@ class LinkedListTest(unittest.TestCase):
         self.assertEqual(l.head, b)
         self.assertEqual(l.tail, b)
         self.assertIsNone(b.next)
-        self.assertIsNone(b.previous)
+        self.assertIsNone(b.prev)
 
 
 if __name__ == "__main__":
