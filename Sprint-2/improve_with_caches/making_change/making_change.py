@@ -1,5 +1,6 @@
 from typing import List
 
+cache = {}
 
 def ways_to_make_change(total: int) -> int:
     """
@@ -7,26 +8,35 @@ def ways_to_make_change(total: int) -> int:
 
     For instance, there are two ways to make a value of 3: with 3x 1 coins, or with 1x 1 coin and 1x 2 coin.
     """
-    return ways_to_make_change_helper(total, [200, 100, 50, 20, 10, 5, 2, 1])
+    coins = [200, 100, 50, 20, 10, 5, 2, 1]
+    ways = [0] * (total + 1)
+    ways[0] = 1
+    
+    for coin in coins:
+        for amount in range(coin, total + 1):
+            ways[amount] += ways[amount - coin]    
+    
+    
+    return ways[total]
 
 
-def ways_to_make_change_helper(total: int, coins: List[int]) -> int:
+def ways_to_make_change_helper(total: int, coins: List[int], coin_start_index: int = 0) -> int:
     """
     Helper function for ways_to_make_change to avoid exposing the coins parameter to callers.
     """
-    if total == 0 or len(coins) == 0:
+    if total == 0:
+        return 1
+    if total < 0 or coin_start_index >= len(coins):
         return 0
 
-    ways = 0
-    for coin_index in range(len(coins)):
-        coin = coins[coin_index]
-        count_of_coin = 1
-        while coin * count_of_coin <= total:
-            total_from_coins = coin * count_of_coin
-            if total_from_coins == total:
-                ways += 1
-            else:
-                intermediate = ways_to_make_change_helper(total - total_from_coins, coins=coins[coin_index+1:])
-                ways += intermediate
-            count_of_coin += 1
+    memo_key = (total, coin_start_index)
+    if memo_key in cache:
+        return cache[memo_key]
+
+    coin = coins[coin_start_index]
+    ways = ways_to_make_change_helper(total, coins, coin_start_index + 1)
+    if coin <= total:
+        ways += ways_to_make_change_helper(total - coin, coins, coin_start_index)
+
+    cache[memo_key] = ways
     return ways
