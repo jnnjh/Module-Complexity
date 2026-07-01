@@ -1,18 +1,29 @@
 from typing import List
 
-
 def find_longest_common_prefix(strings: List[str]):
     """
-    find_longest_common_prefix returns the longest string common at the start of any two strings in the passed list.
-
-    In the event that an empty list, a list containing one string, or a list of strings with no common prefixes is passed, the empty string will be returned.
+    Optimized version using pre-sorting while keeping legacy names and helpers.
     """
+    # Edge case handling
+    if len(strings) < 2:
+        return ""
+
+    # Pre-compute (Sort) - This is the optimization!
+    strings.sort()
+
     longest = ""
-    for string_index, string in enumerate(strings):
-        for other_string in strings[string_index+1:]:
-            common = find_common_prefix(string, other_string)
-            if len(common) > len(longest):
-                longest = common
+
+    # Single loop replacing the nested loop
+    for string_index in range(len(strings) - 1):
+       
+        string = strings[string_index]
+        other_string = strings[string_index + 1]
+
+        common = find_common_prefix(string, other_string)
+
+        if len(common) > len(longest):
+            longest = common
+            
     return longest
 
 
