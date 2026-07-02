@@ -7,19 +7,13 @@ def remove_duplicates(values: Sequence[ItemType]) -> List[ItemType]:
     """
     Remove duplicate values from a sequence, preserving the order of the first occurrence of each value.
 
-    Time complexity:
-    Space complexity:
-    Optimal time complexity:
+    Time complexity:O(n^2)
+    Space complexity:O(n)
+    Optimal time complexity:O(n)
     """
-    unique_items = []
 
-    for value in values:
-        is_duplicate = False
-        for existing in unique_items:
-            if value == existing:
-                is_duplicate = True
-                break
-        if not is_duplicate:
-            unique_items.append(value)
-
-    return unique_items
+   
+    # dict.fromkeys creates a dictionary with values as keys,and automatically remove duplicates
+    #list() to keep the original order.
+    return list(dict.fromkeys(values))
+print(remove_duplicates([1,2,2,3,3,4,0,0]))
