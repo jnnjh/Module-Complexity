@@ -34,6 +34,34 @@ class LinkedListTest(unittest.TestCase):
         self.assertIsNone(b.next)
         self.assertIsNone(b.previous)
 
+    def test_remove_middle(self):
+        l = LinkedList()
+        l.push_head("tail_node")  
+        middle = l.push_head("middle_node")
+        l.push_head("head_node") 
+
+        l.remove(middle)
+
+        self.assertEqual(l.head.value, "head_node")
+        self.assertEqual(l.tail.value, "tail_node")
+        self.assertEqual(l.head.next.value, "tail_node")
+        self.assertEqual(l.tail.previous.value, "head_node")
+
+    def test_pop_empty_list(self):
+        l = LinkedList()
+        # If the list is empty, popping the tail should return None 
+        # instead of crashing the program with an error.
+        result = l.pop_tail()
+
+        self.assertIsNone(result)
+
+    def test_remove_none(self):
+        l = LinkedList()
+        l.push_head("a")
+        # This should just do nothing and not crash
+        l.remove(None)
+        
+        self.assertEqual(l.pop_tail(), "a")
 
 if __name__ == "__main__":
     unittest.main()
