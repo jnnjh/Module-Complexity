@@ -19,3 +19,6 @@ export function hasPairWithSum(numbers, target) {
   }
   return false;
 }
+
+// in this function, we need to use 2 loops to check if there is a pair of numbers that sum to the value.
+// nothing can be optimized in this function, it is already efficient.

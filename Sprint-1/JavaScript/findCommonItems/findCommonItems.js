@@ -12,3 +12,5 @@
 export const findCommonItems = (firstArray, secondArray) => [
   ...new Set(firstArray.filter((item) => secondArray.includes(item))),
 ];
+
+// the function does not need to be optimized as it is already efficient.
