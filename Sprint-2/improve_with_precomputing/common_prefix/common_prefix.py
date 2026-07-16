@@ -7,13 +7,17 @@ def find_longest_common_prefix(strings: List[str]):
 
     In the event that an empty list, a list containing one string, or a list of strings with no common prefixes is passed, the empty string will be returned.
     """
-    longest = ""
-    for string_index, string in enumerate(strings):
-        for other_string in strings[string_index+1:]:
-            common = find_common_prefix(string, other_string)
-            if len(common) > len(longest):
-                longest = common
-    return longest
+        if len(strings) < 2:
+            return ""
+
+        sorted_strings = sorted(strings)
+        first = sorted_strings[0]
+        last = sorted_strings[-1]
+        min_length = min(len(first), len(last))
+        i = 0
+        while i < min_length and first[i] == last[i]:
+            i += 1
+        return first[:i]
 
 
 def find_common_prefix(left: str, right: str) -> str:
